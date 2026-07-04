@@ -1,15 +1,19 @@
 {
-  "items": 79445,
+  "items": 102745,
   "sections": {
     "Ancient Texts": 169,
+    "Celestia et Terra": 23300,
     "Gnosticismus Occultus": 4774,
     "Historium Arcanum": 19693,
     "Hygieia Vitalis": 5786,
-    "Librarium Esotericum": 16113,
+    "Hyperborean Haven": 1844,
+    "Librarium": 6,
     "Occultum Hermeticum": 11730,
     "Phantasmata Horrorum": 2639,
     "Quadrivium Archivum": 14724,
-    "Studium Scientiarum": 3817
+    "Studium Scientiarum": 3817,
+    "ZMore": 44,
+    "_Librarium Images": 14219
   },
   "public_base": "https://joedub67.github.io/librarium-search-assets",
   "files": [

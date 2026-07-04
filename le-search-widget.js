@@ -247,7 +247,7 @@
           <div class="le-top">
             <label class="le-searchline" title="Search the Librarium catalog">
               <svg class="le-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
-              <input class="le-input" type="search" autocomplete="off" spellcheck="false" placeholder="Search 79,445 books…">
+              <input class="le-input" type="search" autocomplete="off" spellcheck="false" placeholder="Search 102,745 books…">
             </label>
             <div class="le-select-wrap"><select class="le-select" aria-label="Collection"><option value="">All Collections</option></select></div>
           </div>
