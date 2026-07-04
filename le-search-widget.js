@@ -196,6 +196,18 @@
           border-bottom: 1px solid rgba(201,185,135,.09);
           background: transparent;
           transition: background .12s ease;
+          cursor: default;
+        }
+        a.le-row {
+          text-decoration: none;
+          color: inherit;
+          cursor: pointer;
+        }
+        a.le-row:hover .le-name::after {
+          content: ' ↗';
+          color: var(--gold);
+          font-size: 12px;
+          opacity: 0.7;
         }
         .le-row:hover { background: var(--hover); }
         .le-name {
@@ -303,6 +315,10 @@
         : '';
     }
 
+    function pcloudLink(code) {
+      return 'https://u.pcloud.link/publink/show?code=' + encodeURIComponent(code);
+    }
+
     function renderResults(items, total, q) {
       if (!q) {
         updateStatus();
@@ -314,13 +330,18 @@
         setEmpty('No matches found. Try a broader term.');
         return;
       }
-      body.innerHTML = items.map(item => (
-        '<div class="le-row">' +
+      body.innerHTML = items.map(item => {
+        var href = item.l ? pcloudLink(item.l) : '#';
+        var inner = (
           '<div class="le-name" title="' + escapeHtml(item.f) + '">' + highlight(item.f, q) + '</div>' +
           '<div class="le-badge">' + escapeHtml(typeLabel(item.t)) + '</div>' +
-          '<div class="le-path" title="' + escapeHtml(item.p) + '">' + highlight(item.p, q) + '</div>' +
-        '</div>'
-      )).join('');
+          '<div class="le-path" title="' + escapeHtml(item.p) + '">' + highlight(item.p, q) + '</div>'
+        );
+        if (item.l) {
+          return '<a class="le-row" href="' + escapeHtml(href) + '" target="_blank" rel="noopener" title="Open folder: ' + escapeHtml(item.p) + '">' + inner + '</a>';
+        }
+        return '<div class="le-row">' + inner + '</div>';
+      }).join('');
       updateStatus(items.length, total);
     }
 
