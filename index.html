@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Librarium Search Widget Demo</title>
+  <style>
+    body { margin:0; min-height:100vh; color:#eee; font-family:Georgia,'Times New Roman',serif; background:#111 url('https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/AzG35yvVa3tMvE0L/le-globe-terrestre-represente-en-deux-plans-hemispheres-dresse-sur-la-projection-de-mr.-de-la-hure-de-l-academie-royale-des-sciences-1775-YX4l50Wzz7SN50eY.jpg') center/cover fixed; }
+    body:before { content:''; position:fixed; inset:0; background:rgba(0,0,0,.56); pointer-events:none; }
+    main { position:relative; width:min(920px,92vw); margin:0 auto; padding:70px 0; }
+    h1 { text-align:center; text-transform:uppercase; letter-spacing:.05em; font-size:clamp(30px,5vw,58px); margin:0 0 10px; }
+    p { text-align:center; color:#d7c9aa; }
+    .links { width:min(760px,100%); margin:25px auto; color:#c9b987; font-size:13px; }
+    a { color:#e5d5a5; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Welcome to the Esoteric Library</h1>
+  <p>freely navigate a curated digital repository of over one hundred thousand pdf books</p>
+  <!-- Librarium Esotericum search widget — All Collections -->
+<div class="le-search"
+     data-index-url="https://joedub67.github.io/librarium-search-assets/librarium-index.json.gz"
+     data-index-js-url="https://joedub67.github.io/librarium-search-assets/librarium-index.js"
+     data-default-section=""></div>
+<script src="https://joedub67.github.io/librarium-search-assets/le-search-widget.js" defer></script>
+
+  <div class="links"><strong>Embeds:</strong><ul><li><a href="embed-homepage.html">Homepage / all collections</a></li><li><a href="embed-ancient-texts.html">Ancient Texts</a></li>
+<li><a href="embed-gnosticismus-occultus.html">Gnosticismus Occultus</a></li>
+<li><a href="embed-historium-arcanum.html">Historium Arcanum</a></li>
+<li><a href="embed-hygieia-vitalis.html">Hygieia Vitalis</a></li>
+<li><a href="embed-librarium-esotericum.html">Librarium Esotericum</a></li>
+<li><a href="embed-occultum-hermeticum.html">Occultum Hermeticum</a></li>
+<li><a href="embed-phantasmata-horrorum.html">Phantasmata Horrorum</a></li>
+<li><a href="embed-quadrivium-archivum.html">Quadrivium Archivum</a></li>
+<li><a href="embed-studium-scientiarum.html">Studium Scientiarum</a></li></ul></div>
+</main>
+</body>
+</html>

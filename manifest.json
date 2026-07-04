@@ -1,0 +1,22 @@
+{
+  "items": 79445,
+  "sections": {
+    "Ancient Texts": 169,
+    "Gnosticismus Occultus": 4774,
+    "Historium Arcanum": 19693,
+    "Hygieia Vitalis": 5786,
+    "Librarium Esotericum": 16113,
+    "Occultum Hermeticum": 11730,
+    "Phantasmata Horrorum": 2639,
+    "Quadrivium Archivum": 14724,
+    "Studium Scientiarum": 3817
+  },
+  "public_base": "https://joedub67.github.io/librarium-search-assets",
+  "files": [
+    "index.html",
+    "le-search-widget.js",
+    "librarium-index.json.gz",
+    "librarium-index.js",
+    "embed-homepage.html"
+  ]
+}
