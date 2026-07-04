@@ -358,7 +358,25 @@
     }
 
     input.addEventListener('input', scheduleSearch);
-    select.addEventListener('change', scheduleSearch);
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        event.stopPropagation();
+        clearTimeout(timer);
+        runSearch();
+        const first = body.querySelector('.le-row');
+        if (first) first.scrollIntoView({ block: 'nearest' });
+      }
+      if (event.key === 'Escape') {
+        input.value = '';
+        clearTimeout(timer);
+        runSearch();
+      }
+    });
+    select.addEventListener('change', () => {
+      clearTimeout(timer);
+      runSearch();
+    });
 
     getIndex(indexUrl, jsUrl).then((loaded) => {
       index = loaded;
