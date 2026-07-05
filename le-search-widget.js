@@ -5,7 +5,7 @@
   const DEFAULT_INDEX_URL = 'https://joedub67.github.io/librarium-search-assets/librarium-index.json.gz';
   const DEFAULT_INDEX_JS_URL = 'https://joedub67.github.io/librarium-search-assets/librarium-index.js';
   const MAX_RESULTS = 80;
-  const CACHE_KEY = '__LE_SEARCH_INDEX_V4__';
+  const CACHE_KEY = '__LE_SEARCH_INDEX_V5__';
 
   function escapeHtml(value) {
     return String(value == null ? '' : value)
@@ -21,7 +21,7 @@
   }
 
   async function loadGzipJson(url) {
-    const resp = await fetch(url, { cache: 'force-cache', mode: 'cors' });
+    const resp = await fetch(url, { cache: 'default', mode: 'cors' });
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
 
     // GitHub Pages serves .gz as application/gzip without Content-Encoding, so we decompress.
