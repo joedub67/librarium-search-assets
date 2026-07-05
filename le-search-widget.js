@@ -201,13 +201,18 @@
         .le-link {
           cursor: pointer;
         }
+        .le-link:hover { background: var(--hover); }
+        .le-link:hover .le-path {
+          color: var(--gold-soft);
+          white-space: normal;
+          overflow: visible;
+        }
         .le-link:hover .le-name::after {
           content: ' ↗';
           color: var(--gold);
           font-size: 12px;
           opacity: 0.7;
         }
-        .le-row:hover { background: var(--hover); }
         .le-name {
           min-width: 0;
           overflow: hidden;
