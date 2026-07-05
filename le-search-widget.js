@@ -198,12 +198,10 @@
           transition: background .12s ease;
           cursor: default;
         }
-        a.le-row {
-          text-decoration: none;
-          color: inherit;
+        .le-link {
           cursor: pointer;
         }
-        a.le-row:hover .le-name::after {
+        .le-link:hover .le-name::after {
           content: ' ↗';
           color: var(--gold);
           font-size: 12px;
@@ -331,14 +329,14 @@
         return;
       }
       body.innerHTML = items.map(item => {
-        var href = item.l ? pcloudLink(item.l) : '#';
+        var href = item.l ? pcloudLink(item.l) : '';
         var inner = (
           '<div class="le-name" title="' + escapeHtml(item.f) + '">' + highlight(item.f, q) + '</div>' +
           '<div class="le-badge">' + escapeHtml(typeLabel(item.t)) + '</div>' +
           '<div class="le-path" title="' + escapeHtml(item.p) + '">' + highlight(item.p, q) + '</div>'
         );
         if (item.l) {
-          return '<a class="le-row" href="' + escapeHtml(href) + '" target="_blank" rel="noopener" title="Open folder: ' + escapeHtml(item.p) + '">' + inner + '</a>';
+          return '<div class="le-row le-link" data-href="' + escapeHtml(href) + '" title="Open folder: ' + escapeHtml(item.p) + '">' + inner + '</div>';
         }
         return '<div class="le-row">' + inner + '</div>';
       }).join('');
@@ -397,6 +395,17 @@
     select.addEventListener('change', () => {
       clearTimeout(timer);
       runSearch();
+    });
+
+    // Click delegation for result rows
+    body.addEventListener('click', (event) => {
+      const row = event.target.closest('.le-link');
+      if (!row) return;
+      const href = row.getAttribute('data-href');
+      if (href) {
+        event.preventDefault();
+        window.open(href, '_blank', 'noopener');
+      }
     });
 
     getIndex(indexUrl, jsUrl).then((loaded) => {
