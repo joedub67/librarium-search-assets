@@ -202,11 +202,7 @@
           cursor: pointer;
         }
         .le-link:hover { background: var(--hover); }
-        .le-link:hover .le-path {
-          color: var(--gold-soft);
-          white-space: normal;
-          overflow: visible;
-        }
+        .le-link:hover .le-path { color: var(--muted); }
         .le-link:hover .le-name::after {
           content: ' ↗';
           color: var(--gold);
@@ -223,15 +219,9 @@
           line-height: 1.35;
         }
         .le-path {
-          grid-column: 1 / -1;
-          min-width: 0;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          color: rgba(117,107,90,.88);
+          color: rgba(117,107,90,.55);
           font-size: 10px;
-          line-height: 1.2;
-          margin-top: -5px;
+          margin-left: 6px;
         }
         .le-badge {
           align-self: start;
@@ -254,7 +244,6 @@
           .le-select-wrap { border-left: 0; border-top: 1px solid var(--line); height: 42px; }
           .le-meta { flex-direction: column; gap: 3px; }
           .le-body { max-height: 360px; }
-          .le-path { display: none; }
         }
       </style>
       <div class="le-box">
@@ -336,9 +325,9 @@
       body.innerHTML = items.map(item => {
         var href = item.l ? pcloudLink(item.l) : '';
         var inner = (
-          '<div class="le-name" title="' + escapeHtml(item.f) + '">' + highlight(item.f, q) + '</div>' +
-          '<div class="le-badge">' + escapeHtml(typeLabel(item.t)) + '</div>' +
-          '<div class="le-path" title="' + escapeHtml(item.p) + '">' + highlight(item.p, q) + '</div>'
+          '<div class="le-name" title="' + escapeHtml(item.f) + '">' + highlight(item.f, q) +
+          ' <span class="le-path">' + escapeHtml(item.p) + '</span></div>' +
+          '<div class="le-badge">' + escapeHtml(typeLabel(item.t)) + '</div>'
         );
         if (item.l) {
           return '<div class="le-row le-link" data-href="' + escapeHtml(href) + '" title="Open folder: ' + escapeHtml(item.p) + '">' + inner + '</div>';
