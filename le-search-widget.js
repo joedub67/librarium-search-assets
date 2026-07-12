@@ -176,21 +176,16 @@
           font-size: 16px;
         }
         .le-select option { background: #101018; color: var(--cream); }
-        .le-meta {
-          display: flex;
-          justify-content: space-between;
-          gap: 16px;
-          padding: 6px 14px;
-          color: var(--muted);
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: .07em;
-          text-transform: uppercase;
-          border-bottom: 1px solid rgba(201,185,135,.10);
-          min-height: 28px;
+        .le-body {
+          display: none;
+          max-height: 400px;
+          overflow: auto;
         }
-        .le-count { white-space: nowrap; }
-        .le-body { max-height: 400px; overflow: auto; }
+        .le-body:empty { display: none; }
+        .le-body:not(:empty) {
+          display: block;
+          border-top: 1px solid rgba(201,185,135,.10);
+        }
         .le-empty {
           padding: 10px 18px 12px;
           text-align: center;
@@ -267,8 +262,7 @@
             </label>
             <div class="le-select-wrap"><select class="le-select" aria-label="Collection"><option value="">All collections</option></select></div>
           </div>
-          <div class="le-meta"><span class="le-status">Loading index…</span><span class="le-count"></span></div>
-          <div class="le-body"><div class="le-empty">Loading the catalogue.</div></div>
+          <div class="le-body"></div>
         </div>
       </div>`;
   }
@@ -293,8 +287,6 @@
 
     const input = shadow.querySelector('.le-input');
     const select = shadow.querySelector('.le-select');
-    const status = shadow.querySelector('.le-status');
-    const count = shadow.querySelector('.le-count');
     const body = shadow.querySelector('.le-body');
 
     let index = null;
@@ -304,33 +296,16 @@
       body.innerHTML = '<div class="le-empty">' + escapeHtml(message) + '</div>';
     }
 
-    function sectionSize(section) {
-      if (!index) return 0;
-      return section ? ((index.sections[section] && index.sections[section].n) || 0) : index.items.length;
-    }
-
-    function updateStatus(shown, total) {
-      const section = select.value;
-      const sectionText = section ? section : 'all collections';
-      const sectionN = sectionSize(section).toLocaleString();
-      status.textContent = sectionN + ' items in ' + sectionText;
-      count.textContent = typeof shown === 'number'
-        ? (total > shown ? shown + ' of ' + total.toLocaleString() + ' matches' : total.toLocaleString() + ' matches')
-        : '';
-    }
-
     function pcloudLink(code) {
       return 'https://u.pcloud.link/publink/show?code=' + encodeURIComponent(code);
     }
 
     function renderResults(items, total, q) {
       if (!q) {
-        updateStatus();
-        setEmpty('Enter a title, author, subject, or collection.');
+        body.innerHTML = '';
         return;
       }
       if (!items.length) {
-        updateStatus(0, 0);
         setEmpty('No matches found. Try a broader term.');
         return;
       }
@@ -346,7 +321,6 @@
         }
         return '<div class="le-row">' + inner + '</div>';
       }).join('');
-      updateStatus(items.length, total);
     }
 
     function runSearch() {
@@ -425,12 +399,9 @@
         select.appendChild(opt);
       }
       if (defaultSection && sections.indexOf(defaultSection) !== -1) select.value = defaultSection;
-      updateStatus();
-      setEmpty('Enter a title, author, subject, or collection.');
+      body.innerHTML = '';
     }).catch((err) => {
       console.error('[Librarium Search] failed:', err);
-      status.innerHTML = '<span class="le-error">Search index failed to load</span>';
-      count.textContent = '';
       setEmpty('The catalogue could not be loaded.');
     });
   }

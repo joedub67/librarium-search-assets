@@ -38,12 +38,16 @@ def test_homepage_search_is_compact_and_translucent_before_focus():
     box_css = source.split(".le-box {", 1)[1].split("}", 1)[0]
     assert "margin: 10px auto;" in box_css
     assert "padding: 0 4px;" in box_css
-    assert "padding: 6px 14px;" in source
-    assert "min-height: 28px;" in source
-    assert "padding: 10px 18px 12px;" in source
 
 
-def test_empty_state_invites_catalogue_search_with_useful_terms():
+def test_idle_widget_has_only_the_search_and_collection_bar():
+    """The homepage must not reserve a below-bar panel before anyone searches."""
     source = WIDGET.read_text()
-    assert "Enter a title, author, subject, or collection." in source
-    assert "Start typing to search the catalogue." not in source
+    shell = source.split("function renderShell", 1)[1].split("function highlight", 1)[0]
+
+    assert '<div class="le-meta"' not in shell
+    assert '<div class="le-body"></div>' in shell
+    assert "Loading the catalogue." not in shell
+    assert ".le-body:empty { display: none; }" in shell
+    assert "body.innerHTML = '';" in source
+    assert "Enter a title, author, subject, or collection." not in source
