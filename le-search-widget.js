@@ -91,42 +91,47 @@
           --gold: #c9b987;
           --gold-soft: #98865e;
           --cream: #e7ddc2;
-          --muted: #756b5a;
-          --ink: rgba(8, 8, 13, 0.88);
-          --line: rgba(201, 185, 135, 0.22);
-          --hover: rgba(201, 185, 135, 0.075);
-          width: min(760px, 100%);
-          margin: 28px auto;
-          padding: 0 10px;
+          --muted: #8f846f;
+          --line: rgba(201,185,135,.18);
+          --hover: rgba(201,185,135,.07);
+          width: min(820px, 100%);
+          margin: 10px auto;
+          padding: 0 4px;
           color: var(--gold);
-          font-family: Georgia, 'Times New Roman', serif;
+          font-family: Dosis, Arial, sans-serif;
           text-align: left;
         }
         .le-panel {
-          border: 1px solid var(--line);
-          border-radius: 12px;
-          background: linear-gradient(180deg, rgba(8,8,14,.90), rgba(8,8,14,.78));
-          box-shadow: 0 18px 45px rgba(0,0,0,.34);
+          border: 1px solid rgba(201,185,135,.14);
+          border-radius: 0;
+          background: rgba(7, 8, 10, .24);
           overflow: hidden;
-          backdrop-filter: blur(2px);
+          backdrop-filter: blur(1px);
+          transition: background .16s ease;
         }
+        .le-panel:focus-within { background: rgba(7, 8, 10, .52); }
         .le-top {
           display: grid;
-          grid-template-columns: 1fr minmax(165px, 245px);
-          gap: 0;
+          grid-template-columns: minmax(0, 1fr) minmax(170px, 218px);
           border-bottom: 1px solid var(--line);
         }
         .le-searchline {
           display: flex;
           align-items: center;
           min-width: 0;
-          background: rgba(0,0,0,.16);
+          background: transparent;
+          transition: background .15s ease;
+        }
+        .le-searchline:focus-within {
+          background: rgba(201,185,135,.06);
+          outline: 1px solid rgba(201,185,135,.52);
+          outline-offset: -1px;
         }
         .le-icon {
-          width: 17px;
-          height: 17px;
+          width: 16px;
+          height: 16px;
           margin-left: 16px;
-          color: var(--muted);
+          color: var(--gold-soft);
           flex: 0 0 auto;
         }
         .le-input {
@@ -137,11 +142,12 @@
           box-shadow: none !important;
           background: transparent !important;
           color: var(--cream) !important;
-          font: 15px/1.3 Georgia, 'Times New Roman', serif !important;
+          font: 500 17px/1.2 Dosis, Arial, sans-serif !important;
+          letter-spacing: .015em;
           padding: 15px 14px 14px 10px !important;
           appearance: none;
         }
-        .le-input::placeholder { color: rgba(152,134,94,.62); opacity: 1; }
+        .le-input::placeholder { color: rgba(201,185,135,.62); opacity: 1; }
         .le-select-wrap { position: relative; border-left: 1px solid var(--line); }
         .le-select {
           width: 100%;
@@ -150,9 +156,11 @@
           outline: 0 !important;
           border-radius: 0 !important;
           color: var(--gold) !important;
-          background: rgba(0,0,0,.28) !important;
-          font: 12px/1.2 Georgia, 'Times New Roman', serif !important;
-          padding: 0 34px 0 13px !important;
+          background: rgba(0,0,0,.14) !important;
+          font: 600 12px/1.2 Dosis, Arial, sans-serif !important;
+          letter-spacing: .08em;
+          text-transform: uppercase;
+          padding: 0 32px 0 14px !important;
           appearance: none;
           -webkit-appearance: none;
           cursor: pointer;
@@ -163,7 +171,7 @@
           right: 13px;
           top: 50%;
           transform: translateY(-58%);
-          color: var(--muted);
+          color: var(--gold-soft);
           pointer-events: none;
           font-size: 16px;
         }
@@ -172,21 +180,23 @@
           display: flex;
           justify-content: space-between;
           gap: 16px;
-          padding: 9px 14px;
+          padding: 6px 14px;
           color: var(--muted);
           font-size: 11px;
-          letter-spacing: .02em;
-          border-bottom: 1px solid rgba(201,185,135,.11);
-          min-height: 33px;
+          font-weight: 600;
+          letter-spacing: .07em;
+          text-transform: uppercase;
+          border-bottom: 1px solid rgba(201,185,135,.10);
+          min-height: 28px;
         }
         .le-count { white-space: nowrap; }
-        .le-body { max-height: 430px; overflow: auto; }
+        .le-body { max-height: 400px; overflow: auto; }
         .le-empty {
-          padding: 28px 18px 31px;
+          padding: 10px 18px 12px;
           text-align: center;
-          color: var(--muted);
-          font-style: italic;
-          font-size: 13px;
+          color: rgba(231,221,194,.67);
+          font-size: 14px;
+          letter-spacing: .02em;
         }
         .le-row {
           display: grid;
@@ -198,16 +208,14 @@
           transition: background .12s ease;
           cursor: default;
         }
-        .le-link {
-          cursor: pointer;
-        }
+        .le-link { cursor: pointer; }
         .le-link:hover { background: var(--hover); }
-        .le-link:hover .le-path { color: var(--muted); }
+        .le-link:hover .le-path { color: var(--gold-soft); }
         .le-link:hover .le-name::after {
           content: ' ↗';
           color: var(--gold);
           font-size: 12px;
-          opacity: 0.7;
+          opacity: .7;
         }
         .le-name {
           min-width: 0;
@@ -215,45 +223,49 @@
           text-overflow: ellipsis;
           white-space: nowrap;
           color: var(--cream);
-          font-size: 13px;
+          font-size: 14px;
+          font-weight: 600;
           line-height: 1.35;
         }
         .le-path {
-          color: rgba(117,107,90,.55);
-          font-size: 10px;
+          color: rgba(143,132,111,.75);
+          font-size: 11px;
+          font-weight: 400;
           margin-left: 6px;
         }
         .le-badge {
           align-self: start;
-          color: #a99458;
-          border: 1px solid rgba(169,148,88,.22);
-          background: rgba(169,148,88,.08);
+          color: #c9b987;
+          border: 1px solid rgba(201,185,135,.20);
+          background: rgba(201,185,135,.07);
           border-radius: 999px;
           padding: 3px 7px 2px;
           font-size: 9px;
+          font-weight: 700;
           line-height: 1;
-          letter-spacing: .06em;
+          letter-spacing: .08em;
           text-transform: uppercase;
           white-space: nowrap;
         }
-        .le-error { color: #c7826f; }
-        mark { background: rgba(201,185,135,.18); color: #fff2c7; padding: 0 1px; border-radius: 2px; }
+        .le-error { color: #d1957d; }
+        mark { background: rgba(201,185,135,.18); color: #fff2c7; padding: 0 1px; }
         @media (max-width: 620px) {
-          .le-box { margin: 18px auto; padding: 0 4px; }
-          .le-top { grid-template-columns: 1fr; }
-          .le-select-wrap { border-left: 0; border-top: 1px solid var(--line); height: 42px; }
-          .le-meta { flex-direction: column; gap: 3px; }
-          .le-body { max-height: 360px; }
+          .le-box { margin: 14px auto; padding: 0 4px; }
+          .le-top { grid-template-columns: minmax(0, 1fr) 112px; }
+          .le-select-wrap { border-left: 1px solid var(--line); border-top: 0; height: auto; }
+          .le-input { font-size: 16px !important; }
+          .le-meta { gap: 8px; padding: 8px 11px; }
+          .le-body { max-height: 340px; }
         }
       </style>
       <div class="le-box">
         <div class="le-panel">
           <div class="le-top">
-            <label class="le-searchline" title="Search the Librarium catalog">
+            <label class="le-searchline" title="Search the Librarium catalogue">
               <svg class="le-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
-              <input class="le-input" type="search" autocomplete="off" spellcheck="false" placeholder="Search 102,745 items…">
+              <input class="le-input" type="search" autocomplete="off" spellcheck="false" placeholder="Search the Librarium…">
             </label>
-            <div class="le-select-wrap"><select class="le-select" aria-label="Collection"><option value="">All Collections</option></select></div>
+            <div class="le-select-wrap"><select class="le-select" aria-label="Collection"><option value="">All collections</option></select></div>
           </div>
           <div class="le-meta"><span class="le-status">Loading index…</span><span class="le-count"></span></div>
           <div class="le-body"><div class="le-empty">Loading the catalogue.</div></div>
@@ -314,7 +326,7 @@
     function renderResults(items, total, q) {
       if (!q) {
         updateStatus();
-        setEmpty('Start typing to search the catalogue.');
+        setEmpty('Enter a title, author, subject, or collection.');
         return;
       }
       if (!items.length) {
@@ -414,7 +426,7 @@
       }
       if (defaultSection && sections.indexOf(defaultSection) !== -1) select.value = defaultSection;
       updateStatus();
-      setEmpty('Start typing to search the catalogue.');
+      setEmpty('Enter a title, author, subject, or collection.');
     }).catch((err) => {
       console.error('[Librarium Search] failed:', err);
       status.innerHTML = '<span class="le-error">Search index failed to load</span>';
